@@ -1,13 +1,26 @@
 const botaoUsuarios = document.getElementById("carregarUsuarios");
 const lista = document.getElementById("listaUsuarios");
+const campoBusca = document.getElementById("busca");
+
+let usuarios = [];
 
 botaoUsuarios.addEventListener("click", async () => {
-  try{
   const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
-  const usuarios = await resposta.json();
+  usuarios = await resposta.json();
+  exibirUsuarios(usuarios);
+  });
 
-  lista.innerHTML = "";
-  usuarios.forEach(usuario => {
+campoBusca.addEventListener("input", ()=>{
+  const termo = campoBusca.value.toLowerCase();
+  const filtrados = usuarios.filter(usuario =>
+    usuario.name.toLowerCase().includes(termo)
+  );
+  exibirUsuarios(filtrados);
+});
+
+function exibirUsuarios(listaDeUsuarios) {
+  lista.innerHTML ="";
+  listaDeUsuarios.forEach(usuario => {
     const li = document.createElement("li");
     li.innerHTML = `
     <strong>${usuario.name}</strong><br>
@@ -16,12 +29,7 @@ botaoUsuarios.addEventListener("click", async () => {
         Empresa: ${usuario.company.name}`;
     lista.appendChild(li);
     });
-  } catch (erro){
-    console.error("Erro ao buscar usuários:", erro);
-    lista.innerHTML = "<li>Erro ao carregar usuários.</li>";
-  }
-});
-
+}
 const cepInput = document.getElementById("cep");
 const buscarCep = document.getElementById("buscarCep");
 const resultadoCep = document.getElementById("resultadoCep");
