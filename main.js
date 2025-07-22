@@ -8,9 +8,13 @@ botaoUsuarios.addEventListener("click", async () => {
 
   lista.innerHTML = "";
   usuarios.forEach(usuario => {
-    const item = document.createElement("li");
-    item.textContent = `${usuario.name} (${usuario.email})`;
-    lista.appendChild(item);
+    const li = document.createElement("li");
+    li.innerHTML = `
+    <strong>${usuario.name}</strong><br>
+        ${usuario.email}<br>
+        Cidade: ${usuario.address.city}<br>
+        Empresa: ${usuario.company.name}`;
+    lista.appendChild(li);
     });
   } catch (erro){
     console.error("Erro ao buscar usuários:", erro);
