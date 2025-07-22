@@ -2,6 +2,7 @@ const botaoUsuarios = document.getElementById("carregarUsuarios");
 const lista = document.getElementById("listaUsuarios");
 
 botaoUsuarios.addEventListener("click", async () => {
+  try{
   const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
   const usuarios = await resposta.json();
 
@@ -10,7 +11,11 @@ botaoUsuarios.addEventListener("click", async () => {
     const item = document.createElement("li");
     item.textContent = `${usuario.name} (${usuario.email})`;
     lista.appendChild(item);
-  });
+    });
+  } catch (erro){
+    console.error("Erro ao buscar usuários:", erro);
+    lista.innerHTML = "<li>Erro ao carregar usuários.</li>";
+  }
 });
 
 const cepInput = document.getElementById("cep");
