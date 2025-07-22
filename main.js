@@ -1,14 +1,24 @@
 const botaoUsuarios = document.getElementById("carregarUsuarios");
 const lista = document.getElementById("listaUsuarios");
 const campoBusca = document.getElementById("busca");
+const loading = document.getElementById("loading");
 
 let usuarios = [];
 
 botaoUsuarios.addEventListener("click", async () => {
+  lista.innerHTML ="";
+  loading.style.display = "block"
+
+  try{
   const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
   usuarios = await resposta.json();
   exibirUsuarios(usuarios);
-  });
+  }catch (erro){
+    lista.innerHTML = "<li> erro ao carregar usuários.<li>";
+  }
+
+  loading.style.display = "none";
+});
 
 campoBusca.addEventListener("input", ()=>{
   const termo = campoBusca.value.toLowerCase();

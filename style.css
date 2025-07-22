@@ -50,3 +50,8 @@ li {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+#loading {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 16px;
+}
