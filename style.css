@@ -55,3 +55,7 @@ li {
   color: #555;
   margin-bottom: 16px;
 }
+
+.usuario-nome:hover{
+  text-decoration: underline;
+}

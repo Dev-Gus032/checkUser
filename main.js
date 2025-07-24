@@ -33,10 +33,24 @@ function exibirUsuarios(listaDeUsuarios) {
   listaDeUsuarios.forEach(usuario => {
     const li = document.createElement("li");
     li.innerHTML = `
-    <strong>${usuario.name}</strong><br>
+
+    <strong class="usuario-nome style"cursor:pointer; color:#007bff;">${usuario.name}</strong><br>
         ${usuario.email}<br>
         Cidade: ${usuario.address.city}<br>
-        Empresa: ${usuario.company.name}`;
+        Empresa: ${usuario.company.name}
+        <div class="detalhes" style="display:none; margin-top: 8px;">
+        Telefone: ${usuario.phone}<br>
+        Website: <a href="https://${usuario.website}" target="blank">${usuario.website}</a><br>
+        Endereço: ${usuario.address.street}, ${usuario.address.suite}, ${usuario.address.city}
+        </div>
+        `;
+
+const nome = li.querySelector(".usuario-nome");
+const detalhes = li.querySelector(".detalhes");
+
+nome.addEventListener("click", ()=>{
+  detalhes.style.display = detalhes.style.display === "none" ? "block" :  "none";
+});
     lista.appendChild(li);
     });
 }
